@@ -5,9 +5,11 @@ var getVariants = function(products, productType) {
   return _(products)
     .filter(function (p) {return p.product_type === productType})
     .flatMap('variants')
+    //Spend the least amount of money possible
     .sortBy(function (variant) {
       return +variant.price;
     })
+    //no duplicate variants
     .uniqBy(function (variant) {
       return variant.title;
     })
